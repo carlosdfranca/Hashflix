@@ -1,29 +1,32 @@
 {% load static %}
 
-<nav class="w-full flex justify-between items-center py-3 px-4 fixed z-50">
+<nav class="flex text-gray-100 justify-between items-center py-3 px-4 fixed w-full z-50 ">
     <div class="w-6/12">
-        <a href="#">
-            <img src="{% static 'images/hashflix.png' %}" class="w-5/12">
+        <a href='/'>
+            <img src="{% static 'images/hashflix.png' %}" alt="logo" class="w-5/12 md:w-2/12">
         </a>
     </div>
+
     <div class="w-6/12 flex flex-nowrap justify-end">
         <div class="mr-2">
-            <form>
-                <input type="text" class="py-1 px-2 rounded-md text-black" placeholder="Pesquisar...">
+            <form method="get" action="#">
+                <input class="py-1 px-2 rounded-md text-black" name="query" value="#" type="text"
+                    placeholder="Pesquisar...">
+                <input type="submit" value="">
             </form>
         </div>
 
         <div class="mr-2">
-            <a href="#">
-                <button class="bg-red-600 text-wuite py-1 px-3 rounded-md">
-                    Login
+            <a href="#" class="">
+                <button class='bg-red-600 py-1 px-3 text-white md:text-lg rounded-md'>
+                    Entrar
                 </button>
             </a>
         </div>
 
         <div class="mr-2">
-            <a href="#">
-                <button class="bg-red-600 text-wuite py-1 px-3 rounded-md">
+            <a href="#" class="">
+                <button class='bg-red-600 py-1 px-3 text-white md:text-lg rounded-md'>
                     Editar Perfil
                 </button>
             </a>
