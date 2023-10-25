@@ -1,4 +1,5 @@
 from typing import Any
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from .models import Filme
 from django.views.generic import TemplateView, ListView, DetailView
@@ -17,6 +18,16 @@ class Homefilmes(ListView):
 class Detalhesfilme(DetailView):
     template_name = "detalhesfilme.html"
     model = Filme
+
+    def get(self, request, *args, **kwargs):
+        # Descobrir qual filme que ele está acessando
+        filme = self.get_object()
+        # Somar 1 nas visualizações do filme
+        filme.visualizacoes += 1
+        # Salvar
+        filme.save()
+
+        return super().get(request, *args, **kwargs) # Redireciona o cara para o link final
 
     def get_context_data(self, **kwargs):
         context =  super(Detalhesfilme, self).get_context_data(**kwargs)
