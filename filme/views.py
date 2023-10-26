@@ -1,4 +1,5 @@
 from typing import Any
+from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from .models import Filme
@@ -38,6 +39,18 @@ class Detalhesfilme(DetailView):
         return context
 
 
+class Pesquisafilme(ListView):
+    template_name = "pesquisafilme.html"
+    model = Filme
+
+    # Editando object_list
+    def get_queryset(self):
+        pesquisa = self.request.GET.get("query")
+        if pesquisa:
+            object_list = self.model.objects.filter(titulo__icontains = pesquisa)
+            return object_list
+        else: 
+            return None
 
 # def homepage(request):
 #     return render(request, "homepage.html")
