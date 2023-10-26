@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'filme.context.lista_filmes_frequentes',
                 'filme.context.lista_filmes_emalta',
+                'filme.context.filme_destaque',
             ],
         },
     },
