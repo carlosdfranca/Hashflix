@@ -1,22 +1,30 @@
 from typing import Any
+from django import http
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Filme
 from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
 class Homepage(TemplateView):
     template_name = "homepage.html"
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('filme:homefilmes')
+        else:
+            return super().get(request, *args, **kwargs)
 
-class Homefilmes(ListView):
+
+class Homefilmes(LoginRequiredMixin, ListView):
     template_name = "homefilmes.html"
     model = Filme
 
 
-class Detalhesfilme(DetailView):
+class Detalhesfilme(LoginRequiredMixin, DetailView):
     template_name = "detalhesfilme.html"
     model = Filme
 
@@ -43,7 +51,7 @@ class Detalhesfilme(DetailView):
         return context
 
 
-class Pesquisafilme(ListView):
+class Pesquisafilme(LoginRequiredMixin, ListView):
     template_name = "pesquisafilme.html"
     model = Filme
 
@@ -55,6 +63,12 @@ class Pesquisafilme(ListView):
             return object_list
         else: 
             return None
+
+class Paginaperfil(LoginRequiredMixin, TemplateView):
+    template_name = "editarperfil.html"
+
+class Criarconta(TemplateView):
+    template_name = "criarconta.html"
 
 # def homepage(request):
 #     return render(request, "homepage.html")
