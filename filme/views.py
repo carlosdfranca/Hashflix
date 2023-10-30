@@ -28,6 +28,10 @@ class Detalhesfilme(DetailView):
         # Salvar
         filme.save()
 
+        # Colocando filme selecionado nos filmes visualizados pelo usuário
+        usuario = request.user
+        usuario.filmes_vistos.add(filme)
+
         return super().get(request, *args, **kwargs) # Redireciona o cara para o link final
 
     def get_context_data(self, **kwargs):
