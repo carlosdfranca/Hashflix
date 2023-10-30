@@ -188,9 +188,9 @@ HomeFilmes hashflix
                 Filmes visualizados
             </h2>
             <div class="wrapper">
-                <section id="popsection1" class="flex flex-nowrap items-center justify-center space-x-8">
-                    <a href="#popsection2" class="arrow__btn text-6xl page">‹</a>
-                    {% for filme in request.user.all %}
+                <section id="vistossection1" class="flex flex-nowrap items-center justify-center space-x-8">
+                    <a href="#vistossection2" class="arrow__btn text-6xl page">‹</a>
+                    {% for filme in request.user.filmes_vistos.all %}
                     {% if forloop.counter < 5 %}
                     <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filme:detalhesfilme' filme.pk %}">
@@ -199,11 +199,11 @@ HomeFilmes hashflix
                     </div> 
                     {% endif %}
                     {% endfor %}
-                    <a href="#popsection2" class="arrow__btn text-6xl">›</a>
+                    <a href="#vistossection2" class="arrow__btn text-6xl">›</a>
                 </section>
-                <section id="popsection2" class="flex flex-nowrap items-center justify-center">
-                    <a href="#popsection1" class="arrow__btn text-6xl">‹</a>
-                    {% for filme in request.user.all %}
+                <section id="vistossection2" class="flex flex-nowrap items-center justify-center">
+                    <a href="#vistossection1" class="arrow__btn text-6xl">‹</a>
+                    {% for filme in request.user.filmes_vistos.all %}
                     {% if forloop.counter > 4 %}
                     <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filme:detalhesfilme' filme.pk %}">
@@ -212,7 +212,7 @@ HomeFilmes hashflix
                     </div> 
                     {% endif %}
                     {% endfor %}
-                    <a href="#popsection1" class="arrow__btn text-6xl">›</a>
+                    <a href="#vistossection1" class="arrow__btn text-6xl">›</a>
                 </section>
             </div>
         </div>
